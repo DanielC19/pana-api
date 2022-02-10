@@ -10,7 +10,7 @@ class Saying extends Model
     use HasFactory;
 
     static $rules = [
-        'saying' => 'string|required|max:255|unique',
+        'saying' => 'string|required|max:255|unique:sayings,saying',
     ];
 
     protected $fillable = [
