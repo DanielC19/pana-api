@@ -25,11 +25,10 @@ Route::prefix('saying')->group(function () {
 
 Route::prefix('playlist')->group(function () {
 
-    Route::post('/me',          [PlaylistController::class, 'me']);
     Route::get('/user/{id}',    [PlaylistController::class, 'user']);
     Route::post('/all',         [PlaylistController::class, 'all']);
     Route::post('/create',      [PlaylistController::class, 'create']);
-    Route::get('/delete/{id}',  [PlaylistController::class, 'delete']);
+    Route::post('/delete',      [PlaylistController::class, 'delete']);
 
 });
 
