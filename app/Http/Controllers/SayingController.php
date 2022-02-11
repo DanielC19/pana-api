@@ -35,7 +35,7 @@ class SayingController extends Controller
 
     public function random() {
 
-        $saying = Saying::inRandomOrder()->limit(1)->get();
+        $saying = Saying::all()->random();
         return response()->json($saying);
 
     }
