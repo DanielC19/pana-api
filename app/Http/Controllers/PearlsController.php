@@ -20,7 +20,7 @@ class PearlsController extends Controller
         // Si está correcta, la agrega en la base de datos
         try {
             Pearls::create($request->all());
-            return 'Haz inmortalizado una de las Perlas de la Sabiduría :D';
+            return 'Has inmortalizado una de las Perlas de la Sabiduría :D';
         } catch (\Exception $e) {
             return 'Hubo un problema, inténtalo más tarde :(';
         }
