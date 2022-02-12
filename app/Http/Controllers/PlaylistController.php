@@ -31,7 +31,7 @@ class PlaylistController extends Controller
         try {
             request()->validate(Playlist::$rules);
         } catch (\Exception $e) {
-            return 'Ingresa nombre y link válidos'; 
+            return 'Ingresa nombre y link válidos, inválido'; 
         }
 
         try {
@@ -59,7 +59,7 @@ class PlaylistController extends Controller
                 return 'Esa playlist no es tuya amiguito';
             }
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :('.$e->getMessage();
+            return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
 }
