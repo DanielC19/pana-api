@@ -34,8 +34,6 @@ Route::prefix('playlist')->group(function () {
 
 Route::prefix('profile')->group(function () {
     
-    Route::post('create',               [ProfileController::class, 'create']);
-    Route::post('me',                   [ProfileController::class, 'me']);
     Route::get('user/{id}',             [ProfileController::class, 'user']);
     Route::post('add/nickname',         [ProfileController::class, 'nickname']);
     Route::post('add/role',             [ProfileController::class, 'role']);
