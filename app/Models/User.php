@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory;
 
+    static $rules = [
+        'discord_user_id' => 'integer|required|unique:users,discord_user_id'
+    ];
+
     protected $fillable = [
         'discord_user_id'
     ];
