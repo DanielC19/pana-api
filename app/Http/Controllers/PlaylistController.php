@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
 {
-    public function user($user_id)
+    public function user($discord_user_id)
     {
-        $user = User::find($user_id);
-        $user->playlists;
+        $user = User::where('discord_user_id', $discord_user_id)->first();
 
-        return response()->json($user);
+        if ($user !== null) {
+            $user->playlists;
+            return response()->json($user);
+        }
+        return 'Hubo un problema, inténtalo más tarde :(';
     }
 
     public function all()
@@ -31,11 +34,11 @@ class PlaylistController extends Controller
         try {
             request()->validate(Playlist::$rules);
         } catch (\Exception $e) {
-            return 'Ingresa nombre y link válidos, inválido'; 
+            return 'Ingresa nombre y link válidos, inválido';
         }
 
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             Playlist::create([
                 'user_id' => $user->id,
                 'name' => $request->name,
@@ -50,7 +53,7 @@ class PlaylistController extends Controller
     public function delete(Request $request)
     {
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $playlist = Playlist::find($request->playlist);
             if ($playlist->user_id == $user->id) {
                 $playlist->delete();

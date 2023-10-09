@@ -12,12 +12,16 @@ class ProfileController extends Controller
 {
     public function user($discord_user_id)
     {
-        $user = User::all()->where('discord_user_id', $discord_user_id)->random();
-        $user->profile;
-        $user->nicknames;
-        $user->games;
+        $user = User::where('discord_user_id', $discord_user_id)->first();
 
-        return response()->json($user);
+        if ($user !== null) {
+            $user->profile;
+            $user->nicknames;
+            $user->games;
+
+            return response()->json($user);
+        }
+        return 'Hubo un problema, inténtalo más tarde :(';
     }
 
     public function nickname(Request $request)
@@ -29,7 +33,7 @@ class ProfileController extends Controller
         }
 
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             Nicknames::create([
                 'user_id' => $user->id,
                 'nickname' => $request->nickname
@@ -49,7 +53,7 @@ class ProfileController extends Controller
         }
 
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'role' => $request->role
             ]);
@@ -58,7 +62,7 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
+
     public function wanted(Request $request)
     {
         try {
@@ -68,7 +72,7 @@ class ProfileController extends Controller
         }
 
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'wanted' => $request->wanted
             ]);
@@ -77,7 +81,7 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
+
     public function birth(Request $request)
     {
         try {
@@ -85,9 +89,9 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return 'Es que no sabe cuando nació o qué ome chimbo';
         }
-    
+
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'birthday' => $request->birth
             ]);
@@ -106,7 +110,7 @@ class ProfileController extends Controller
         }
 
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             Games::create([
                 'user_id' => $user->id,
                 'game' => $request->game
@@ -116,7 +120,7 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
+
     public function icfes(Request $request)
     {
         try {
@@ -124,9 +128,9 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return 'Sacó tan poquito que ni lo puedo procesar';
         }
-        
+
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'icfes' => $request->icfes
             ]);
@@ -135,7 +139,7 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
+
     public function memorable(Request $request)
     {
         try {
@@ -143,9 +147,9 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return 'Resuma hermano o ponga algo válido ome inválido';
         }
-    
+
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'memorable-act' => $request->memorable
             ]);
@@ -154,17 +158,17 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
-    public function reprehesible(Request $request)
+
+    public function reprehensible(Request $request)
     {
         try {
             request()->validate(['reprehesible' => 'string|required|max:255']);
         } catch (\Exception $e) {
             return 'Resuma hermano o ponga algo válido ome inválido';
         }
-    
+
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'reprehesible-act' => $request->reprehesible
             ]);
@@ -173,7 +177,7 @@ class ProfileController extends Controller
             return 'Hubo un problema, inténtalo más tarde :(';
         }
     }
-    
+
     public function entry(Request $request)
     {
         try {
@@ -181,9 +185,9 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return 'Resuma hermano o ponga algo válido ome inválido';
         }
-    
+
         try {
-            $user = User::all()->where('discord_user_id', $request->discord_user_id)->random();
+            $user = User::where('discord_user_id', $request->discord_user_id)->first();
             $user->profile->update([
                 'group-entry' => $request->entry
             ]);
