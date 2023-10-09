@@ -16,7 +16,7 @@ class PlaylistController extends Controller
             $user->playlists;
             return response()->json($user);
         }
-        return 'Hubo un problema, inténtalo más tarde :(';
+        return response()->json('Hubo un problema, inténtalo más tarde :(');
     }
 
     public function all()
@@ -34,7 +34,7 @@ class PlaylistController extends Controller
         try {
             request()->validate(Playlist::$rules);
         } catch (\Exception $e) {
-            return 'Ingresa nombre y link válidos, inválido';
+            return response()->json('Ingresa nombre y link válidos, inválido');
         }
 
         try {
@@ -44,9 +44,9 @@ class PlaylistController extends Controller
                 'name' => $request->name,
                 'link' => $request->link
             ]);
-            return 'Has agregado una playlist de cule temazos';
+            return response()->json('Has agregado una playlist de cule temazos');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -57,12 +57,12 @@ class PlaylistController extends Controller
             $playlist = Playlist::find($request->playlist);
             if ($playlist->user_id == $user->id) {
                 $playlist->delete();
-                return 'Has borrado una playlist, mínimo era guaracha';
+                return response()->json('Has borrado una playlist, mínimo era guaracha');
             } else {
-                return 'Esa playlist no es tuya amiguito';
+                return response()->json('Esa playlist no es tuya amiguito');
             }
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 }

@@ -21,7 +21,7 @@ class ProfileController extends Controller
 
             return response()->json($user);
         }
-        return 'Hubo un problema, inténtalo más tarde :(';
+        return response()->json('Hubo un problema, inténtalo más tarde :(');
     }
 
     public function nickname(Request $request)
@@ -29,7 +29,7 @@ class ProfileController extends Controller
         try {
             request()->validate(Nicknames::$rules);
         } catch (\Exception $e) {
-            return 'Escribe un apodo válido, inválido';
+            return response()->json('Escribe un apodo válido, inválido');
         }
 
         try {
@@ -38,9 +38,9 @@ class ProfileController extends Controller
                 'user_id' => $user->id,
                 'nickname' => $request->nickname
             ]);
-            return 'Chimba de apodo rey';
+            return response()->json('Chimba de apodo rey');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -49,7 +49,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['role' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Escribe un rol válido, inválido';
+            return response()->json('Escribe un rol válido, inválido');
         }
 
         try {
@@ -57,9 +57,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'role' => $request->role
             ]);
-            return 'Ese es nuestro '.$request->role;
+            return response()->json('Ese es nuestro '.$request->role);
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -68,7 +68,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['wanted' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Muy suave, eso no es un crimen';
+            return response()->json('Muy suave, eso no es un crimen');
         }
 
         try {
@@ -76,9 +76,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'wanted' => $request->wanted
             ]);
-            return 'Uy mano, mucha la lacra... ojalá le hagan el tombo-truco';
+            return response()->json('Uy mano, mucha la lacra... ojalá le hagan el tombo-truco');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -87,7 +87,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['birth' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Es que no sabe cuando nació o qué ome chimbo';
+            return response()->json('Es que no sabe cuando nació o qué ome chimbo');
         }
 
         try {
@@ -95,9 +95,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'birthday' => $request->birth
             ]);
-            return "Se nos creció el pelao' :')";
+            return response()->json("Se nos creció el pelao' :')");
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -106,7 +106,7 @@ class ProfileController extends Controller
         try {
             request()->validate(Games::$rules);
         } catch (\Exception $e) {
-            return 'Todo el día pegado de esa pantalla y no sabe como se llama el juego mijo';
+            return response()->json('Todo el día pegado de esa pantalla y no sabe como se llama el juego mijo');
         }
 
         try {
@@ -115,9 +115,9 @@ class ProfileController extends Controller
                 'user_id' => $user->id,
                 'game' => $request->game
             ]);
-            return 'Nananana insano, puro vicio al '.$request->game;
+            return response()->json('Nananana insano, puro vicio al '.$request->game);
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -126,7 +126,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['icfes' => 'integer|required']);
         } catch (\Exception $e) {
-            return 'Sacó tan poquito que ni lo puedo procesar';
+            return response()->json('Sacó tan poquito que ni lo puedo procesar');
         }
 
         try {
@@ -134,9 +134,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'icfes' => $request->icfes
             ]);
-            return 'Uf nea, le dió raspado para aplicar en la guerrilla';
+            return response()->json('Uf nea, le dió raspado para aplicar en la guerrilla');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -145,7 +145,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['memorable' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Resuma hermano o ponga algo válido ome inválido';
+            return response()->json('Resuma hermano o ponga algo válido ome inválido');
         }
 
         try {
@@ -153,9 +153,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'memorable-act' => $request->memorable
             ]);
-            return 'Que chino tan pro gvon +respect';
+            return response()->json('Que chino tan pro gvon +respect');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -164,7 +164,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['reprehesible' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Resuma hermano o ponga algo válido ome inválido';
+            return response()->json('Resuma hermano o ponga algo válido ome inválido');
         }
 
         try {
@@ -172,9 +172,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'reprehesible-act' => $request->reprehesible
             ]);
-            return 'Usted si es mucha la gonorrea perra sarnosa sapa miada nea... sin palabras';
+            return response()->json('Usted si es mucha la gonorrea perra sarnosa sapa miada nea... sin palabras');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 
@@ -183,7 +183,7 @@ class ProfileController extends Controller
         try {
             request()->validate(['entry' => 'string|required|max:255']);
         } catch (\Exception $e) {
-            return 'Resuma hermano o ponga algo válido ome inválido';
+            return response()->json('Resuma hermano o ponga algo válido ome inválido');
         }
 
         try {
@@ -191,9 +191,9 @@ class ProfileController extends Controller
             $user->profile->update([
                 'group-entry' => $request->entry
             ]);
-            return 'Esperaba algo más épico pero ta bien, de la Panadería nunca saldrás igualmente >:D';
+            return response()->json('Esperaba algo más épico pero ta bien, de la Panadería nunca saldrás igualmente >:D');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 

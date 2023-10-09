@@ -14,15 +14,15 @@ class SayingController extends Controller
             $request->validate(Saying::$rules);
 
         } catch (\Exception $e) {
-            return 'Ingresa solo el dicho y sin repetir, no es tan difícil :)';
+            return response()->json('Ingresa solo el dicho y sin repetir, no es tan difícil :)');
         }
         try {
 
             Saying::create($request->all());
-            return 'Melo, agregaste un pana-dicho';
+            return response()->json('Melo, agregaste un pana-dicho');
 
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 

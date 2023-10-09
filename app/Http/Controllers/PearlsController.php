@@ -15,14 +15,14 @@ class PearlsController extends Controller
         try {
             $request->validate(Pearls::$rules);
         } catch (\Exception $e) {
-            return 'Ingresa toda la información de la perla correctamente';
+            return response()->json('Ingresa toda la información de la perla correctamente');
         }
         // Si está correcta, la agrega en la base de datos
         try {
             Pearls::create($request->all());
-            return 'Has inmortalizado una de las Perlas de la Sabiduría :D';
+            return response()->json('Has inmortalizado una de las Perlas de la Sabiduría :D');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 

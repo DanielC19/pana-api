@@ -16,9 +16,9 @@ class GeneralController extends Controller
             $user = User::create($request->all());
             Profile::create(['user_id' => $user->id]);
             
-            return '¡Bienvenido al Bot de la Panadería! Espero sacarte alguna sonrisa :D';
+            return response()->json('¡Bienvenido al Bot de la Panadería! Espero sacarte alguna sonrisa :D');
         } catch (\Exception $e) {
-            return 'Hubo un problema, inténtalo más tarde :(';
+            return response()->json('Hubo un problema, inténtalo más tarde :(');
         }
     }
 }
