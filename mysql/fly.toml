@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for pana-api-sql on 2023-10-09T13:52:34-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "pana-api-sql"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "bog"
+
+[processes]
+app = "--datadir /data/mysql --default-authentication-plugin mysql_native_password --performance-schema=OFF --innodb-buffer-pool-size 64M"
+
+[mounts]
+  source="mysqldata"
+  destination="/data"
+
+# MYSQL_DATABASE can name your database and will created aftering deploy
+[env]
+  MYSQL_DATABASE = "pana_api"
+  MYSQL_USER = "daniel"
+
+# As of 04/25/2023:
+# MySQL 8.0.33 has a bug in it
+# so avoid that specific version
+[build]
+  image = "mysql:8.0.31"
